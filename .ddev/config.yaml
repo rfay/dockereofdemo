@@ -3,11 +3,8 @@ type: php
 docroot: ""
 php_version: "7.4"
 webserver_type: nginx-fpm
-router_http_port: "8080"
-router_https_port: "8443"
-#omit_containers: [db, ddev-ssh-agent]
 xdebug_enabled: false
-additional_hostnames: []
+additional_hostnames: [x,y,z,"*.junk"]
 additional_fqdns: []
 mariadb_version: "10.3"
 mysql_version: ""
