@@ -2,13 +2,12 @@
 set -eu -o pipefail
 
 ./docker-desktop-version.sh
-docker pull nginx >/dev/null
-printf "\nArchitecture: $(arch)"
-printf "\nRunning nginx container and curling it\n"
+printf "\nArchitecture: $(arch)\n"
+
 docker stop nginx >/dev/null 2>&1 || true
 while true; do
   echo -n .
-  docker run --name nginx --rm -p 8080:80 -v $PWD:/usr/share/nginx/html:ro -d nginx >/dev/null
-  curl -sSL --fail http://localhost:8080 >/dev/null
-  docker stop nginx >/dev/null
+  ddev start >/dev/null 2>&1 && starttime=$(date)
+  curl -sSL --fail http://dockereofdemo.ddev.site:8080 >/dev/null || ( printf "curl failed at $(date) after ddev start finishing at ${starttime}" && docker inspect --format "{{json .State.Health }}" ddev-dockereofdemo-web && exit 1 )
+  ddev stop >/dev/null
 done
