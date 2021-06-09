@@ -2,6 +2,7 @@
 set -eu -o pipefail
 
 ./docker-desktop-version.sh
+docker pull nginx >/dev/null
 printf "\nArchitecture: $(arch)"
 printf "\nRunning nginx container and curling it\n"
 docker stop nginx >/dev/null 2>&1 || true
