@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eu -o pipefail
 
+if ! command -v ddev >/dev/null ; then
+  echo "Please install ddev, see https://ddev.readthedocs.io" && exit 1
+fi
 ddev --version
 ./docker-desktop-version.sh
 printf "\nArchitecture: $(arch)\n"
